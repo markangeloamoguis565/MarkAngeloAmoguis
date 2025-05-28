@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Customer Reviews - Amoguis Tropical Twist</title>
+    <link rel="stylesheet" href="reviews.css">
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif";>
+   
+    <header>
+        <div class="logo">
+            <h1>Amoguis Tropical Twist</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="mv.html">Mission & Vision</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="profile.html">Owner Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="reviews">
+        <div class="section-content">
+            <h2><strong>Customer Reviews</strong></h2>
+            
+            
+            <div class="review-form">
+                <h3>Leave a Review</h3>
+                <form id="reviewForm" onsubmit="submitReview(event)">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="rating">Rating (1 to 5):</label>
+                    <select id="rating" name="rating" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+
+                    <label for="review">Your Review:</label>
+                    <textarea id="review" name="review" rows="5" required></textarea>
+
+                    <button type="submit">Submit Review</button>
+                </form>
+            </div>
+
+            <!-- Reviews List -->
+            <div class="reviews-list" id="reviewsList">
+                <h3>What Our Customers Say</h3>
+                <!-- Existing reviews will be listed here -->
+                <div class="review-item">
+                    <h4>John Doe</h4>
+                    <p><strong>Rating:</strong> 5/5</p>
+                    <p>“I absolutely love Amoguis Tropical Twist! The flavors are always refreshing, and the staff is so friendly. My go-to place for bubble tea!”</p>
+                </div>
+                <div class="review-item">
+                    <h4>Jane Smith</h4>
+                    <p><strong>Rating:</strong> 4/5</p>
+                    <p>“Great drinks and atmosphere. I only wish there were more seating available on busy days!”</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 <strong>Amoguis Tropical Twist</strong>. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample reviews array for demo purposes
+        let reviews = [
+    {
+        name: "Ethan Carrizo",
+        rating: 5,
+        review: "I absolutely love Amoguis Tropical Twist! The flavors are always refreshing, and the staff is so friendly. My go-to place for bubble tea!"
+    },
+    {
+        name: "Joaquin Gutierrez",
+        rating: 4,
+        review: "Great drinks and atmosphere. I only wish there were more seating available on busy days!"
+    },
+    {
+        name: "Hannah Cruz",
+        rating: 5,
+        review: "The mango milk tea is a game changer! I also love the fact that they use fresh fruit. The vibe of the store is very relaxing too."
+    },
+    {
+        name: "Jacob Torres",
+        rating: 3,
+        review: "The drinks are good, but I wish there were more variety in the toppings. I’d love to see more options in the future!"
+    },
+    {
+        name: "Ella Lopez",
+        rating: 5,
+        review: "Excellent service and delicious drinks. The staff was super helpful in recommending a new drink, and it was perfect. Highly recommend!"
+    },
+    {
+        name: "Manuel Diaz",
+        rating: 4,
+        review: "I’m a big fan of bubble tea, and Amoguis Tropical Twist has been one of my favorites! Their taro milk tea is amazing, but sometimes the lines can get long."
+    },
+    {
+        name: "Ellie Reyes",
+        rating: 5,
+        review: "I had the best experience at Amoguis Tropical Twist! Their passion fruit tea was the perfect balance of sweet and tangy. Can’t wait to go back!"
+    },
+    {
+        name: "Mia Sanchez",
+        rating: 2,
+        review: "I’ve had better bubble tea elsewhere. The flavor was a bit too sweet for me, and I think the texture of the pearls could be improved."
+    },
+    {
+        name: "Zoe Salazar",
+        rating: 4,
+        review: "Really good drinks, and the variety is fantastic. I love the tropical options. My only suggestion would be to add more seating for busy times."
+    },
+    {
+        name: "Jasmine Mendoza",
+        rating: 5,
+        review: "Fantastic experience! I tried their new coconut milk tea, and it was absolutely delicious. I’m already planning my next visit."
+    }
+];
+
+
+        // Display existing reviews
+        function displayReviews() {
+            const reviewsList = document.getElementById("reviewsList");
+            reviewsList.innerHTML = "<h3>What Our Customers Say</h3>";
+            
+            reviews.forEach(review => {
+                const reviewElement = document.createElement("div");
+                reviewElement.classList.add("review-item");
+                reviewElement.innerHTML = `
+                    <h4>${review.name}</h4>
+                    <p><strong>Rating:</strong> ${review.rating}/5</p>
+                    <p>${review.review}</p>
+                `;
+                reviewsList.appendChild(reviewElement);
+            });
+        }
+
+        // Submit a new review
+        function submitReview(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById("name").value;
+            const rating = document.getElementById("rating").value;
+            const reviewText = document.getElementById("review").value;
+
+            const newReview = { name, rating: parseInt(rating), review: reviewText };
+            reviews.push(newReview);
+
+            displayReviews();  // Re-render the reviews list
+            document.getElementById("reviewForm").reset();  // Reset form after submission
+        }
+
+        // Initial load of reviews
+        displayReviews();
+    </script>
+
+</body>
+</html>
